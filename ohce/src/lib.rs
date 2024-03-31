@@ -1,5 +1,5 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+fn reverse(s: &str) -> String {
+    format!("Called reverse({})", s)
 }
 
 #[cfg(test)]
@@ -7,9 +7,18 @@ mod tests {
     use super::*;
 
     #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+    fn reverse_ascii_single_char() {
+        assert_eq!("a", reverse("a"));
+    }
+
+    #[test]
+    fn reverse_ascii_two_char() {
+        assert_eq!("ym", reverse("my"));
+    }
+
+    #[test]
+    fn reverse_ascii_multi_char() {
+        assert_eq!("yratnemele", reverse("elementary"));
     }
 }
 
