@@ -35,9 +35,9 @@ Where `<TEST_NAME>` should be replaced by the test that wants to be runned.
 
 ## Kata structure
 
-The source code is inside the [`src/`][./src/] directory, there are two files
+The source code is inside the [`src/`](./src/) directory, there are two files
 in it:
 
-- [`main.rs`][./src/main.rs] contains the binary crate executed via `cargo run`.
-- [`lib.rs`][./src/lib.rs] contains the library crate with all functions and tests.
+- [`main.rs`](./src/main.rs) contains the binary crate executed via `cargo run`.
+- [`lib.rs`](./src/lib.rs) contains the library crate with all functions and tests.
 
