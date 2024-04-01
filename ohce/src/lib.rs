@@ -1,5 +1,9 @@
+use unicode_segmentation::UnicodeSegmentation;
+
 fn reverse(s: &str) -> String {
-    s.chars().rev().collect()
+    let g = s.graphemes(true);
+    let rev_g = g.rev();
+    rev_g.collect()
 }
 
 #[cfg(test)]
