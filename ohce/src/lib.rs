@@ -20,5 +20,30 @@ mod tests {
     fn reverse_ascii_multi_char() {
         assert_eq!("yratnemele", reverse("elementary"));
     }
+
+    #[test]
+    fn reverse_utf8_single_grapheme() {
+        assert_eq!("á", reverse("á"));
+    }
+
+    #[test]
+    fn reverse_utf8_two_graphemes() {
+        assert_eq!("üá", reverse("áü"));
+    }
+
+    #[test]
+    fn reverse_utf8_multi_grapheme() {
+        assert_eq!("regnidörhcS", reverse("Schrödinger"));
+    }
+
+    #[test]
+    fn reverse_utf8_multi_grapheme_swedish() {
+        assert_eq!("mörtsÅ", reverse("Åström"));
+    }
+
+    #[test]
+    fn reverse_utf8_multi_grapheme_emoji() {
+        assert_eq!("❌✅", reverse("✅❌"));
+    }
 }
 
