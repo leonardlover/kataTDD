@@ -1,42 +1,13 @@
-#[cfg(not(test))]
-use chrono::Local;
+mod day_moment;
+
 #[cfg(test)]
 mod mocks;
+
 #[cfg(test)]
-use mocks::{Local, set_timestamp};
+use mocks::Local;
 
-use chrono::NaiveTime;
+use day_moment::{DayMoment, get_day_moment};
 use unicode_segmentation::UnicodeSegmentation;
-
-enum DayMoment {
-    Morning,
-    Afternoon,
-    Evening,
-}
-
-fn get_day_moment_start_time(dm: DayMoment) -> NaiveTime {
-    let s = match dm {
-        DayMoment::Morning => "06:00:00",
-        DayMoment::Afternoon => "12:00:00",
-        DayMoment::Evening => "20:00:00",
-    };
-    NaiveTime::parse_from_str(s, "%H:%M:%S").unwrap()
-}
-
-fn get_day_moment() -> DayMoment {
-    let local_time = Local::now().time();
-    let time_morning = get_day_moment_start_time(DayMoment::Morning);
-    let time_afternoon = get_day_moment_start_time(DayMoment::Afternoon);
-    let time_evening = get_day_moment_start_time(DayMoment::Evening);
-
-    if time_morning <= local_time && local_time < time_afternoon {
-        DayMoment::Morning
-    } else if time_afternoon <= local_time && local_time < time_evening {
-        DayMoment::Afternoon
-    } else {
-        DayMoment::Evening
-    }
-}
 
 fn greeting(name: &str) -> String {
     let day_moment = get_day_moment();
@@ -53,6 +24,8 @@ fn reverse(s: &str) -> String {
 
 #[cfg(test)]
 mod tests {
+    use chrono::NaiveTime;
+    use mocks::set_timestamp;
     use super::*;
 
     #[test]
