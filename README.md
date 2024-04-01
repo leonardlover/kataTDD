@@ -46,6 +46,5 @@ the other do this instead
 cargo test -- --test-threads=1
 ```
 
-This is not required in general, but it's good to know. No kata in this project
-has tests that interfere with each other, so they're safe to run in parallel.
+This is not required in general, but it's good to know.
 
