@@ -1,8 +1,5 @@
 fn reverse(s: &str) -> String {
-    let chars = s.chars();
-    let rev_chars = chars.rev();
-    let rev_str = rev_chars.collect();
-    rev_str
+    s.chars().rev().collect()
 }
 
 #[cfg(test)]
