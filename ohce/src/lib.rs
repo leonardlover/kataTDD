@@ -5,10 +5,24 @@ mod mocks;
 #[cfg(test)]
 use mocks::{Local, set_timestamp};
 
+use chrono::NaiveTime;
+use std::cmp::Ordering;
 use unicode_segmentation::UnicodeSegmentation;
 
 fn greeting(name: &str) -> String {
-    format!("Called greeting({})", name)
+    let local_time = Local::now().time();
+
+    match local_time.cmp(&NaiveTime::parse_from_str("12:00:00", "%H:%M:%S").unwrap()) {
+        Ordering::Less => match local_time.cmp(&NaiveTime::parse_from_str("06:00:00", "%H:%M:%S").unwrap()) {
+            Ordering::Less => format!("¡Buenas noches {}!", name),
+            _ => format!("¡Buenos días {}!", name),
+        },
+        Ordering::Equal => format!("¡Buenas tardes {}!", name),
+        Ordering::Greater => match local_time.cmp(&NaiveTime::parse_from_str("20:00:00", "%H:%M:%S").unwrap()) {
+            Ordering::Less => format!("¡Buenas tardes {}!", name),
+            _ => format!("¡Buenas noches {}!", name),
+        },
+    }
 }
 
 fn reverse(s: &str) -> String {
@@ -18,7 +32,6 @@ fn reverse(s: &str) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use chrono::NaiveTime;
 
     #[test]
     fn greeting_morning_lower_bound() {
