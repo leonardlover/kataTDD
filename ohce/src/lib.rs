@@ -1,9 +1,7 @@
 use unicode_segmentation::UnicodeSegmentation;
 
 fn reverse(s: &str) -> String {
-    let g = s.graphemes(true);
-    let rev_g = g.rev();
-    rev_g.collect()
+    s.graphemes(true).rev().collect()
 }
 
 #[cfg(test)]
