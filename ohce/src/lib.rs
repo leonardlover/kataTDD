@@ -21,6 +21,7 @@ fn parse_str_to_NaiveTime(s: &str) -> NaiveTime {
 
 fn get_day_moment() -> DayMoment {
     use DayMoment::*;
+    use Ordering::*;
 
     let local_time = Local::now().time();
     let time_morning = parse_str_to_NaiveTime("06:00:00");
@@ -28,13 +29,13 @@ fn get_day_moment() -> DayMoment {
     let time_evening = parse_str_to_NaiveTime("20:00:00");
 
     match local_time.cmp(&time_afternoon) {
-        Ordering::Less => match local_time.cmp(&time_morning) {
-            Ordering::Less => Evening,
+        Less => match local_time.cmp(&time_morning) {
+            Less => Evening,
             _ => Morning,
         },
-        Ordering::Equal => Afternoon,
-        Ordering::Greater => match local_time.cmp(&time_evening) {
-            Ordering::Less => Afternoon,
+        Equal => Afternoon,
+        Greater => match local_time.cmp(&time_evening) {
+            Less => Afternoon,
             _ => Evening,
         },
     }
