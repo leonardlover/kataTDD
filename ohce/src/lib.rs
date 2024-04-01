@@ -6,7 +6,6 @@ mod mocks;
 use mocks::{Local, set_timestamp};
 
 use chrono::NaiveTime;
-use std::cmp::Ordering;
 use unicode_segmentation::UnicodeSegmentation;
 
 enum DayMoment {
@@ -15,29 +14,27 @@ enum DayMoment {
     Evening,
 }
 
-fn parse_str_to_NaiveTime(s: &str) -> NaiveTime {
+fn get_day_moment_start_time(dm: DayMoment) -> NaiveTime {
+    let s = match dm {
+        DayMoment::Morning => "06:00:00",
+        DayMoment::Afternoon => "12:00:00",
+        DayMoment::Evening => "20:00:00",
+    };
     NaiveTime::parse_from_str(s, "%H:%M:%S").unwrap()
 }
 
 fn get_day_moment() -> DayMoment {
-    use DayMoment::*;
-    use Ordering::*;
-
     let local_time = Local::now().time();
-    let time_morning = parse_str_to_NaiveTime("06:00:00");
-    let time_afternoon = parse_str_to_NaiveTime("12:00:00");
-    let time_evening = parse_str_to_NaiveTime("20:00:00");
+    let time_morning = get_day_moment_start_time(DayMoment::Morning);
+    let time_afternoon = get_day_moment_start_time(DayMoment::Afternoon);
+    let time_evening = get_day_moment_start_time(DayMoment::Evening);
 
-    match local_time.cmp(&time_afternoon) {
-        Less => match local_time.cmp(&time_morning) {
-            Less => Evening,
-            _ => Morning,
-        },
-        Equal => Afternoon,
-        Greater => match local_time.cmp(&time_evening) {
-            Less => Afternoon,
-            _ => Evening,
-        },
+    if time_morning <= local_time && local_time < time_afternoon {
+        DayMoment::Morning
+    } else if time_afternoon <= local_time && local_time < time_evening {
+        DayMoment::Afternoon
+    } else {
+        DayMoment::Evening
     }
 }
 

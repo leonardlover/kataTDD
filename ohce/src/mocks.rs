@@ -1,4 +1,4 @@
-use chrono::{DateTime, NaiveDateTime};
+use chrono::DateTime;
 use std::cell::Cell;
 
 thread_local! {
