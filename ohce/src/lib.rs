@@ -1,3 +1,10 @@
+#[cfg(not(test))]
+use chrono::Local;
+#[cfg(test)]
+mod mocks;
+#[cfg(test)]
+use mocks::{Local, set_timestamp};
+
 use unicode_segmentation::UnicodeSegmentation;
 
 fn greeting(name: &str) -> String {
@@ -11,58 +18,104 @@ fn reverse(s: &str) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use chrono::NaiveTime;
 
     #[test]
     fn greeting_morning_lower_bound() {
         // time = 6:00
+        set_timestamp(1034154000);
+        assert_eq!(
+            NaiveTime::parse_from_str("06:00:00", "%H:%M:%S"),
+            Ok(Local::now().time())
+        );
         assert_eq!("¡Buenos días Leonardo!", greeting("Leonardo"));
     }
 
     #[test]
     fn greeting_morning() {
         // time = 9:30
+        set_timestamp(1034166600);
+        assert_eq!(
+            NaiveTime::parse_from_str("09:30:00", "%H:%M:%S"),
+            Ok(Local::now().time())
+        );
         assert_eq!("¡Buenos días Leonardo!", greeting("Leonardo"));
     }
 
     #[test]
     fn greeting_morning_upper_bound() {
         // time = 11:59
+        set_timestamp(1034175540);
+        assert_eq!(
+            NaiveTime::parse_from_str("11:59:00", "%H:%M:%S"),
+            Ok(Local::now().time())
+        );
         assert_eq!("¡Buenos días Leonardo!", greeting("Leonardo"));
     }
 
     #[test]
     fn greeting_afternoon_lower_bound() {
         // time = 12:00
+        set_timestamp(1034175600);
+        assert_eq!(
+            NaiveTime::parse_from_str("12:00:00", "%H:%M:%S"),
+            Ok(Local::now().time())
+        );
         assert_eq!("¡Buenas tardes Tomás!", greeting("Tomás"));
     }
 
     #[test]
     fn greeting_afternoon() {
         // time = 18:15
+        set_timestamp(1034198100);
+        assert_eq!(
+            NaiveTime::parse_from_str("18:15:00", "%H:%M:%S"),
+            Ok(Local::now().time())
+        );
         assert_eq!("¡Buenas tardes Tomás!", greeting("Tomás"));
     }
 
     #[test]
     fn greeting_afternoon_upper_bound() {
         // time = 19:59
+        set_timestamp(1034204340);
+        assert_eq!(
+            NaiveTime::parse_from_str("19:59:00", "%H:%M:%S"),
+            Ok(Local::now().time())
+        );
         assert_eq!("¡Buenas tardes Tomás!", greeting("Tomás"));
     }
 
     #[test]
     fn greeting_evening_lower_bound() {
         // time = 20:00
+        set_timestamp(1034204400);
+        assert_eq!(
+            NaiveTime::parse_from_str("20:00:00", "%H:%M:%S"),
+            Ok(Local::now().time())
+        );
         assert_eq!("¡Buenas noches Paula!", greeting("Paula"));
     }
 
     #[test]
     fn greeting_evening() {
         // time = 01:45
+        set_timestamp(1034138700);
+        assert_eq!(
+            NaiveTime::parse_from_str("01:45:00", "%H:%M:%S"),
+            Ok(Local::now().time())
+        );
         assert_eq!("¡Buenas noches Paula!", greeting("Paula"));
     }
 
     #[test]
     fn greeting_evening_upper_bound() {
         // time = 05:59
+        set_timestamp(1034153940);
+        assert_eq!(
+            NaiveTime::parse_from_str("05:59:00", "%H:%M:%S"),
+            Ok(Local::now().time())
+        );
         assert_eq!("¡Buenas noches Paula!", greeting("Paula"));
     }
 
