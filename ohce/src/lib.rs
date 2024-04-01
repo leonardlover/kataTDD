@@ -9,19 +9,43 @@ use chrono::NaiveTime;
 use std::cmp::Ordering;
 use unicode_segmentation::UnicodeSegmentation;
 
-fn greeting(name: &str) -> String {
-    let local_time = Local::now().time();
+enum DayMoment {
+    Morning,
+    Afternoon,
+    Evening,
+}
 
-    match local_time.cmp(&NaiveTime::parse_from_str("12:00:00", "%H:%M:%S").unwrap()) {
-        Ordering::Less => match local_time.cmp(&NaiveTime::parse_from_str("06:00:00", "%H:%M:%S").unwrap()) {
-            Ordering::Less => format!("¡Buenas noches {}!", name),
-            _ => format!("¡Buenos días {}!", name),
+fn parse_str_to_NaiveTime(s: &str) -> NaiveTime {
+    NaiveTime::parse_from_str(s, "%H:%M:%S").unwrap()
+}
+
+fn get_day_moment() -> DayMoment {
+    use DayMoment::*;
+
+    let local_time = Local::now().time();
+    let time_morning = parse_str_to_NaiveTime("06:00:00");
+    let time_afternoon = parse_str_to_NaiveTime("12:00:00");
+    let time_evening = parse_str_to_NaiveTime("20:00:00");
+
+    match local_time.cmp(&time_afternoon) {
+        Ordering::Less => match local_time.cmp(&time_morning) {
+            Ordering::Less => Evening,
+            _ => Morning,
         },
-        Ordering::Equal => format!("¡Buenas tardes {}!", name),
-        Ordering::Greater => match local_time.cmp(&NaiveTime::parse_from_str("20:00:00", "%H:%M:%S").unwrap()) {
-            Ordering::Less => format!("¡Buenas tardes {}!", name),
-            _ => format!("¡Buenas noches {}!", name),
+        Ordering::Equal => Afternoon,
+        Ordering::Greater => match local_time.cmp(&time_evening) {
+            Ordering::Less => Afternoon,
+            _ => Evening,
         },
+    }
+}
+
+fn greeting(name: &str) -> String {
+    let day_moment = get_day_moment();
+    match day_moment {
+        DayMoment::Morning => format!("¡Buenos días {}!", name),
+        DayMoment::Afternoon => format!("¡Buenas tardes {}!", name),
+        DayMoment::Evening => format!("¡Buenas noches {}!", name),
     }
 }
 
