@@ -15,11 +15,8 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 To install Rust on Windows check out the official [installation options][install].
 
-After installation check that Cargo is installed by running
-
-```bash
-cargo --version
-```
+After installation check that Cargo is installed by running `cargo --version`
+in a terminal.
 
 [rust]: https://www.rust-lang.org
 [install]: https://forge.rust-lang.org/infra/other-installation-methods.html
