@@ -9,6 +9,10 @@ use mocks::Local;
 use day_moment::{DayMoment, get_day_moment};
 use unicode_segmentation::UnicodeSegmentation;
 
+fn farewell(s: &str, name: &str) -> bool {
+    format!("Called farewell({}, {})", s, name);
+}
+
 fn greeting(name: &str) -> String {
     let day_moment = get_day_moment();
     match day_moment {
@@ -31,6 +35,26 @@ mod tests {
     use chrono::NaiveTime;
     use mocks::set_timestamp;
     use super::*;
+
+    #[test]
+    fn farewell_success() {
+        assert!(farewell("Stop!", "Guacolda"));
+    }
+
+    #[test]
+    fn farewell_no_exclamation() {
+        assert!(!farewell("Stop", "Guacolda"));
+    }
+
+    #[test]
+    fn farewell_no_uppercase() {
+        assert!(!farewell("stop!", "Guacolda"));
+    }
+
+    #[test]
+    fn farewell_unsuccess() {
+        assert!(!farewell("manifold", "Guacolda"));
+    }
 
     #[test]
     fn greeting_morning_lower_bound() {
