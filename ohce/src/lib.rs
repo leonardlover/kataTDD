@@ -10,7 +10,13 @@ use day_moment::{DayMoment, get_day_moment};
 use unicode_segmentation::UnicodeSegmentation;
 
 fn farewell(s: &str, name: &str) -> bool {
-    format!("Called farewell({}, {})", s, name);
+    let t = "Stop!";
+    if s == t {
+        println!("Adios {}", name);
+        true
+    } else {
+        false
+    }
 }
 
 fn greeting(name: &str) -> String {
