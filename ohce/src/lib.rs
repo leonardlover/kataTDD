@@ -19,7 +19,8 @@ fn greeting(name: &str) -> String {
 }
 
 fn is_palindrome(s: &str) -> bool {
-    format!("Called is_palindrome({})", s);
+    let s_rev = reverse(s);
+    s == s_rev
 }
 
 fn reverse(s: &str) -> String {
