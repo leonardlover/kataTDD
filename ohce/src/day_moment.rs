@@ -13,11 +13,11 @@ pub enum DayMoment {
 
 fn get_day_moment_start_time(dm: DayMoment) -> NaiveTime {
     let s = match dm {
-        DayMoment::Morning => "06:00:00",
-        DayMoment::Afternoon => "12:00:00",
-        DayMoment::Evening => "20:00:00",
+        DayMoment::Morning => "06:00",
+        DayMoment::Afternoon => "12:00",
+        DayMoment::Evening => "20:00",
     };
-    NaiveTime::parse_from_str(s, "%H:%M:%S").unwrap()
+    NaiveTime::parse_from_str(s, "%H:%M").unwrap()
 }
 
 pub fn get_day_moment() -> DayMoment {

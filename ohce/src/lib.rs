@@ -66,7 +66,7 @@ mod tests {
         // time = 6:00
         set_timestamp(1034154000);
         assert_eq!(
-            NaiveTime::parse_from_str("06:00:00", "%H:%M:%S"),
+            NaiveTime::parse_from_str("06:00", "%H:%M"),
             Ok(Local::now().time())
         );
         assert_eq!("¡Buenos días Leonardo!", greeting("Leonardo"));
@@ -77,7 +77,7 @@ mod tests {
         // time = 9:30
         set_timestamp(1034166600);
         assert_eq!(
-            NaiveTime::parse_from_str("09:30:00", "%H:%M:%S"),
+            NaiveTime::parse_from_str("09:30", "%H:%M"),
             Ok(Local::now().time())
         );
         assert_eq!("¡Buenos días Leonardo!", greeting("Leonardo"));
@@ -88,7 +88,7 @@ mod tests {
         // time = 11:59
         set_timestamp(1034175540);
         assert_eq!(
-            NaiveTime::parse_from_str("11:59:00", "%H:%M:%S"),
+            NaiveTime::parse_from_str("11:59", "%H:%M"),
             Ok(Local::now().time())
         );
         assert_eq!("¡Buenos días Leonardo!", greeting("Leonardo"));
@@ -99,7 +99,7 @@ mod tests {
         // time = 12:00
         set_timestamp(1034175600);
         assert_eq!(
-            NaiveTime::parse_from_str("12:00:00", "%H:%M:%S"),
+            NaiveTime::parse_from_str("12:00", "%H:%M"),
             Ok(Local::now().time())
         );
         assert_eq!("¡Buenas tardes Tomás!", greeting("Tomás"));
@@ -110,7 +110,7 @@ mod tests {
         // time = 18:15
         set_timestamp(1034198100);
         assert_eq!(
-            NaiveTime::parse_from_str("18:15:00", "%H:%M:%S"),
+            NaiveTime::parse_from_str("18:15", "%H:%M"),
             Ok(Local::now().time())
         );
         assert_eq!("¡Buenas tardes Tomás!", greeting("Tomás"));
@@ -121,7 +121,7 @@ mod tests {
         // time = 19:59
         set_timestamp(1034204340);
         assert_eq!(
-            NaiveTime::parse_from_str("19:59:00", "%H:%M:%S"),
+            NaiveTime::parse_from_str("19:59", "%H:%M"),
             Ok(Local::now().time())
         );
         assert_eq!("¡Buenas tardes Tomás!", greeting("Tomás"));
@@ -132,7 +132,7 @@ mod tests {
         // time = 20:00
         set_timestamp(1034204400);
         assert_eq!(
-            NaiveTime::parse_from_str("20:00:00", "%H:%M:%S"),
+            NaiveTime::parse_from_str("20:00", "%H:%M"),
             Ok(Local::now().time())
         );
         assert_eq!("¡Buenas noches Paula!", greeting("Paula"));
@@ -143,7 +143,7 @@ mod tests {
         // time = 01:45
         set_timestamp(1034138700);
         assert_eq!(
-            NaiveTime::parse_from_str("01:45:00", "%H:%M:%S"),
+            NaiveTime::parse_from_str("01:45", "%H:%M"),
             Ok(Local::now().time())
         );
         assert_eq!("¡Buenas noches Paula!", greeting("Paula"));
@@ -154,7 +154,7 @@ mod tests {
         // time = 05:59
         set_timestamp(1034153940);
         assert_eq!(
-            NaiveTime::parse_from_str("05:59:00", "%H:%M:%S"),
+            NaiveTime::parse_from_str("05:59", "%H:%M"),
             Ok(Local::now().time())
         );
         assert_eq!("¡Buenas noches Paula!", greeting("Paula"));
