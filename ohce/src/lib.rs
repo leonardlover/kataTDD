@@ -18,6 +18,10 @@ fn greeting(name: &str) -> String {
     }
 }
 
+fn is_palindrome(s: &str) -> bool {
+    format!("Called is_palindrome({})", s);
+}
+
 fn reverse(s: &str) -> String {
     s.graphemes(true).rev().collect()
 }
@@ -126,6 +130,56 @@ mod tests {
         );
         assert_eq!("¡Buenas noches Paula!", greeting("Paula"));
     }
+
+    #[test]
+     fn is_palindrome_ascii_single_char() {
+         assert!(is_palindrome("p"));
+     }
+
+     #[test]
+     fn is_palindrome_ascii_two_char_true() {
+         assert!(is_palindrome("ss"));
+     }
+
+     #[test]
+     fn is_palindrome_ascii_two_char_false() {
+         assert!(!is_palindrome("ea"));
+     }
+
+     #[test]
+     fn is_palindrome_ascii_multi_char_true() {
+         assert!(is_palindrome("arepera"));
+     }
+
+     #[test]
+     fn is_palindrome_ascii_multi_char_false() {
+         assert!(!is_palindrome("domain"));
+     }
+
+     #[test]
+     fn is_palindrome_utf8_single_char() {
+         assert!(is_palindrome("Å"));
+     }
+
+     #[test]
+     fn is_palindrome_utf8_two_char_true() {
+         assert!(is_palindrome("ÅÅ"));
+     }
+
+     #[test]
+     fn is_palindrome_utf8_two_char_false() {
+         assert!(!is_palindrome("üé"));
+     }
+
+     #[test]
+     fn is_palindrome_utf8_multi_char_true() {
+         assert!(is_palindrome("ÅÅßÅÅ"));
+     }
+
+     #[test]
+     fn is_palindrome_utf8_multi_char_false() {
+         assert!(!is_palindrome("Gauß"));
+     }
 
     #[test]
     fn reverse_ascii_single_char() {
