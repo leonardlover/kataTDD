@@ -11,11 +11,13 @@ Check out original log in [kata-log][ohce-kata].
 Run by executing the following command:
 
 ```bash
-cargo run <NAME>
+cargo run -- <NAME>
 ```
 
 Where `<NAME>` should be replaced by your name, if name is left blank, `ohce`
-will exit prematurely displaying an error message.
+will exit prematurely displaying an error message. You can pass multiple
+arguments to the program, all of these will be considered as your name but
+redundant whitespace will be trimmed.
 
 ## Testing
 
