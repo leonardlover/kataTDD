@@ -7,6 +7,7 @@ mod mocks;
 use mocks::Local;
 
 use day_moment::{DayMoment, get_day_moment};
+use std::io;
 use unicode_segmentation::UnicodeSegmentation;
 
 fn farewell(s: &str, name: &str) -> bool {
@@ -33,6 +34,33 @@ fn is_palindrome(s: &str) -> bool {
 
 fn reverse(s: &str) -> String {
     s.graphemes(true).rev().collect()
+}
+
+pub fn ohce(name: &str) {
+    println!("{}", greeting(&name));
+
+    loop {
+        let mut word = String::new();
+
+        io::stdin()
+            .read_line(&mut word)
+            .expect("Failed to read line");
+        word = word.trim().to_string();
+
+        if word.len() == 0 {
+            continue;
+        }
+
+        println!("{}", reverse(&word));
+
+        if is_palindrome(&word) {
+            println!("¡Bonita palabra!");
+        }
+
+        if farewell(&word, &name) {
+            break;
+        }
+    }
 }
 
 #[cfg(test)]
