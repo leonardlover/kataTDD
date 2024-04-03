@@ -42,4 +42,6 @@ in it:
 
 - [`main.rs`](./src/main.rs) contains the binary crate executed via `cargo run`.
 - [`lib.rs`](./src/lib.rs) contains the library crate with all functions and tests.
+- [`day_moment.rs`](./src/day_moment.rs) contains internal implementation of greeting.
+- [`mocks.rs`](./src/mocks.rs) contains mock used for setting time via a timestamp.
 
