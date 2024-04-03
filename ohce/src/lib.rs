@@ -46,15 +46,15 @@ pub fn ohce(name: &str) {
             continue;
         }
 
+        if farewell(&word) {
+            println!("Adios {}", name);
+            break;
+        }
+
         println!("{}", reverse(&word));
 
         if is_palindrome(&word) {
             println!("¡Bonita palabra!");
-        }
-
-        if farewell(&word) {
-            println!("Adios {}", name);
-            break;
         }
     }
 }
