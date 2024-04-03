@@ -10,13 +10,8 @@ use day_moment::{DayMoment, get_day_moment};
 use std::io;
 use unicode_segmentation::UnicodeSegmentation;
 
-fn farewell(s: &str, name: &str) -> bool {
-    if s == "Stop!" {
-        println!("Adios {}", name);
-        true
-    } else {
-        false
-    }
+fn farewell(s: &str) -> bool {
+    s == "Stop!"
 }
 
 fn greeting(name: &str) -> String {
@@ -57,7 +52,8 @@ pub fn ohce(name: &str) {
             println!("¡Bonita palabra!");
         }
 
-        if farewell(&word, &name) {
+        if farewell(&word) {
+            println!("Adios {}", name);
             break;
         }
     }
@@ -71,22 +67,22 @@ mod tests {
 
     #[test]
     fn farewell_success() {
-        assert!(farewell("Stop!", "Guacolda"));
+        assert!(farewell("Stop!"));
     }
 
     #[test]
     fn farewell_no_exclamation() {
-        assert!(!farewell("Stop", "Guacolda"));
+        assert!(!farewell("Stop"));
     }
 
     #[test]
     fn farewell_no_uppercase() {
-        assert!(!farewell("stop!", "Guacolda"));
+        assert!(!farewell("stop!"));
     }
 
     #[test]
     fn farewell_unsuccess() {
-        assert!(!farewell("manifold", "Guacolda"));
+        assert!(!farewell("manifold"));
     }
 
     #[test]
